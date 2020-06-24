@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import multer from 'multer';
 import CreateUserService from '../services/create-user-service';
+import UpdateUserAvatarService from '../services/update-user-avatar-service';
 import ensureAuthenticated from '../middlewares/ensure-authenticated';
 import uploadConfig from '../config/upload';
 
@@ -27,8 +28,18 @@ usersRouter.post('/', async (req: Request, res: Response) => {
 });
 
 usersRouter.patch('/avatar', ensureAuthenticated, upload.single('avatar'), async (req: Request, res: Response) => {
-  console.log(req.file);
-  return res.json({ ok: true });
+  try {
+    const updateUserAvatar = new UpdateUserAvatarService();
+
+    const user = await updateUserAvatar.execute({
+      user_id: req.user.id,
+      avatarFilename: req.file.filename,
+    });
+
+    return res.json(user);
+  } catch (e) {
+    return res.status(400).json({ message: e.message });
+  }
 });
 
 export default usersRouter;
