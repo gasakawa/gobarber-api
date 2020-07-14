@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
-import User from './user-model';
+import User from '../../../../users/infra/typeorm/entities/user';
 
 @Entity('appointments')
 class Appointment {
