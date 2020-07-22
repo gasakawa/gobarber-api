@@ -6,7 +6,6 @@ import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensure-au
 import AppointmentRepository from '@modules/appointments/infra/typeorm/repositories/appointment-repository';
 
 const appointmentsRouter = Router();
-const appointmentsRepository = new AppointmentRepository();
 
 // putting the middleware to check authentication to all routes
 appointmentsRouter.use(ensureAuthenticated);
@@ -22,6 +21,7 @@ appointmentsRouter.post('/', async (req: Request, res: Response) => {
   const { provider_id, date } = req.body;
 
   const parsedDate = parseISO(date);
+  const appointmentsRepository = new AppointmentRepository();
 
   const createAppointmentService = new CreateAppointmentService(appointmentsRepository);
 
