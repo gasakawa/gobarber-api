@@ -14,4 +14,23 @@ describe('CreateAppointment', () => {
     expect(appointment).toHaveProperty('id');
     expect(appointment.provider_id).toBe('123456789');
   });
+
+  it('should not be able to create two appointments on the same time', async () => {
+    const fakeAppointmentsRepository = new FakeAppointmentRepository();
+    const createAppointment = new CreateAppointmentService(fakeAppointmentsRepository);
+
+    const appointmentDate = new Date();
+
+    await createAppointment.execute({
+      date: appointmentDate,
+      provider_id: '123456789',
+    });
+
+    expect(
+      createAppointment.execute({
+        date: appointmentDate,
+        provider_id: '123456789',
+      }),
+    ).rejects.toBeInstanceOf(Error);
+  });
 });

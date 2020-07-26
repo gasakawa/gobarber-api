@@ -4,3 +4,5 @@ temp/*
 .vscode/
 
 !temp/.gitkeep
+
+coverage/
