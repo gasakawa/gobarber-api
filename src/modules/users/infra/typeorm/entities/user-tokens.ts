@@ -10,9 +10,6 @@ class UserToken {
   token: string;
 
   @Column()
-  name: string;
-
-  @Column()
   user_id: string;
 
   @CreateDateColumn()
