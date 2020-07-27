@@ -21,6 +21,7 @@
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
+    "no-empty": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
