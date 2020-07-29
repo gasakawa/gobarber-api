@@ -28,6 +28,6 @@ export default class SendForgottenPasswordEmailService {
 
     await this.userTokensRepository.generate(user.id);
 
-    this.mailProvider.sendMail(email, 'recover your password');
+    await this.mailProvider.sendMail(email, `recover your password`);
   }
 }
