@@ -22,22 +22,6 @@ describe('SendForgottenPasswordEmail', () => {
     );
   });
 
-  it('should be able to recover the user password using the email', async () => {
-    const sendMail = jest.spyOn(fakeMailProvider, 'sendMail');
-
-    await fakeUsersRepository.create({
-      name: 'Fake User',
-      email: 'fake_email@email.com',
-      password: 'fake_password',
-    });
-
-    await sendForgottenPasswordEmail.execute({
-      email: 'fake_email@email.com',
-    });
-
-    expect(sendMail).toHaveBeenCalledWith('fake_email@email.com', 'recover your password');
-  });
-
   it('should not be able to recover a non-existing user password', async () => {
     await expect(
       sendForgottenPasswordEmail.execute({

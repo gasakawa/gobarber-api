@@ -70,4 +70,14 @@ describe('ResetPassword', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should not be able to reset the password if user does not exist for token provided', async () => {
+    const { token } = await fakeUserTokensRepository.generate('fake_user_id');
+    await expect(
+      resetPassword.execute({
+        password: 'new_password',
+        token,
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });
