@@ -3,13 +3,18 @@ import FakeUsersRepository from '../repositories/fakes/fake-users-repository';
 import CreateUserService from './create-user-service';
 import FakeHashProvider from '../providers/hash-provider/fakes/fake-hash-provider';
 
-describe('CreateUser', () => {
-  it('should be able to create a new user', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
-    const createAppointment = new CreateUserService(fakeUsersRepository, fakeHashProvider);
+let fakeUsersRepository: FakeUsersRepository;
+let fakeHashProvider: FakeHashProvider;
+let createUser: CreateUserService;
 
-    const user = await createAppointment.execute({
+describe('CreateUser', () => {
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository();
+    fakeHashProvider = new FakeHashProvider();
+    createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider);
+  });
+  it('should be able to create a new user', async () => {
+    const user = await createUser.execute({
       name: 'fake_user',
       email: 'fake_email@email.com',
       password: 'fake_password',
@@ -19,10 +24,6 @@ describe('CreateUser', () => {
   });
 
   it('should not be able to create a new user with same email', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
-    const createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider);
-
     await createUser.execute({
       name: 'fake_user',
       email: 'fake_email@email.com',
