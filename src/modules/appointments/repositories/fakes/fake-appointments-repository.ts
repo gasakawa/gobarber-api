@@ -9,10 +9,10 @@ import IFindAllInDayFromProviderDTO from '@modules/appointments/dtos/ifind-all-i
 export default class FakeAppointmentRepository implements IAppointmentsRepository {
   private appointments: Appointment[] = [];
 
-  public async create({ date, provider_id }: ICreateAppointmentDTO): Promise<Appointment> {
+  public async create({ date, provider_id, user_id }: ICreateAppointmentDTO): Promise<Appointment> {
     const appointment = new Appointment();
 
-    Object.assign(appointment, { id: uuid(), date, provider_id });
+    Object.assign(appointment, { id: uuid(), date, provider_id, user_id });
     this.appointments.push(appointment);
 
     return appointment;
