@@ -1,6 +1,6 @@
 [
   {
-    "name": "postgres",
+    "name": "default",
     "type": "postgres",
     "host": "localhost",
     "port": 5432,
@@ -17,8 +17,13 @@
     "name": "mongo",
     "type": "mongodb",
     "host": "localhost",
+    "username": "admin",
+    "password": "admin",
     "port": 27017,
     "database": "gobarber",
+    "extra": {
+      "authSource": "admin"
+    },
     "useUnifiedTopology": true,
     "entities": ["./src/modules/**/infra/typeorm/schemas/*.ts"]
   }
