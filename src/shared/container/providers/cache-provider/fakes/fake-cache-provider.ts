@@ -7,7 +7,7 @@ interface ICacheData {
 export default class FakeCacheProvider implements ICacheProvider {
   private readonly cache: ICacheData = {};
 
-  public async save(key: string, value: any): Promise<void> {
+  public async save(key: string, value: unknown): Promise<void> {
     this.cache[key] = JSON.stringify(value);
   }
 
