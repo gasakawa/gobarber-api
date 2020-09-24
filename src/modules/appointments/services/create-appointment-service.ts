@@ -38,7 +38,7 @@ class CreateAppointmentService {
       throw new AppError('Only is avoid create appointment between 8 and 17');
     }
 
-    const findAppointmentInsSameData = await this.appointmentsRepository.findByDate(appointmentDate);
+    const findAppointmentInsSameData = await this.appointmentsRepository.findByDate(appointmentDate, provider_id);
 
     if (findAppointmentInsSameData) {
       throw new AppError('This appointment is already booked');
