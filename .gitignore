@@ -8,4 +8,4 @@ temp/*
 
 coverage/
 
-ormconfig.json
+!ormconfig.json
